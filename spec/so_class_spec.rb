@@ -6,6 +6,8 @@
 ##
 ## Author(s):
 ##  - Lta Akr <>
+##  Edited by
+##  - Emmanuel Derozin <emmanueldd>
 ##
 ## Copyright (C) 2013 Lta Akr
 
@@ -18,18 +20,18 @@ describe 'So Class:' do
       it 'works' do
         point = Point.new(10, 20)
 
-        point.is_a?(Point).should be_true
-        point.x.should eq(10)
-        point.y.should eq(20)
-        point.pos.should eq([10, 20])
+        expect(point.is_a?(Point)).to be_truthy
+        expect(point.x).to eq(10)
+        expect(point.y).to eq(20)
+        expect(point.pos).to eq([10, 20])
       end
 
       it 'works also without parameters' do
         point = Point.new
 
-        point.is_a?(Point).should be_true
-        point.x.should eq(0)
-        point.y.should eq(0)
+        expect(point.is_a?(Point)).to be_truthy
+        expect(point.x).to eq(0)
+        expect(point.y).to eq(0)
       end
     end
 
@@ -42,37 +44,37 @@ describe 'So Class:' do
       it 'supports assignation' do
         @p1.x = @p1.y = 42
 
-        @p1.x.should eq(42)
-        @p1.y.should eq(42)
+        expect(@p1.x).to eq(42)
+        expect(@p1.y).to eq(42)
       end
 
       it 'supports relative move' do
         @p1.move!(5, 5)
-        @p1.pos.should eq([6, 7])
+        expect(@p1.pos).to eq([6, 7])
       end
       it 'supports absolute move' do
         @p1.move_to!(5, 5)
-        @p1.pos.should eq([5, 5])
+        expect(@p1.pos).to eq([5, 5])
       end
       it 'supports addition of 2 points' do
         p3 = @p1 + @p2
-        p3.pos.should eq([4, 6])
+        expect(p3.pos).to eq([4, 6])
       end
     end
 
     describe 'Magic' do
       it 'detects if it is at magic place' do
-        Point.new.magic?.should be_false
-        Point.new(42, 42).magic?.should be_true
+        expect(Point.new.magic?).to be_falsey
+        expect(Point.new(42, 42).magic?).to be_truthy
       end
       it 'has a protected method that moves the point to magic position !' do
         point = Point.new
 
         expect { point.move_to_magic_position! }.to raise_error(NoMethodError)
 
-        point.magic?.should be_false
+        expect(point.magic?).to be_falsey
         point.instance_eval { move_to_magic_position! }
-        point.magic?.should be_true
+        expect(point.magic?).to be_truthy
       end
     end
 
@@ -83,11 +85,11 @@ describe 'So Class:' do
       it 'creates bunch of random points' do
         points = Point.random(10, 5, 5, 100, 100)
 
-        points.is_a?(Array).should be_true
-        points.length.should eq(10)
+        expect(points.is_a?(Array)).to be_truthy
+        expect(points.length).to eq(10)
 
         points.each do |point|
-          point.is_a?(Point).should be_true
+          expect(point.is_a?(Point)).to be_truthy
           expect(point.x).to be >= 5
           expect(point.y).to be >= 5
           expect(point.x).to be <= 100
@@ -98,7 +100,7 @@ describe 'So Class:' do
       it 'counts the number of random created objects' do
         count = Point.random_count
         Point.random(10, 5, 5, 100, 100)
-        Point.random_count.should eq(10 + count)
+        expect(Point.random_count).to eq(10 + count)
       end
     end
   end
@@ -107,27 +109,27 @@ describe 'So Class:' do
     it 'is a Point with a color' do
       white_point = ColouredPoint.new
 
-      white_point.is_a?(Point).should be_true
-      white_point.is_a?(ColouredPoint).should be_true
+      expect(white_point.is_a?(Point)).to be_truthy
+      expect(white_point.is_a?(ColouredPoint)).to be_truthy
 
-      white_point.x.should eq(0)
-      white_point.y.should eq(0)
-      white_point.color.should eq('FFFFFF')
+      expect(white_point.x).to eq(0)
+      expect(white_point.y).to eq(0)
+      expect(white_point.color).to eq('FFFFFF')
     end
 
     it 'can change of colour' do
       white_point = ColouredPoint.new
 
       white_point.color = 'F1C420'
-      white_point.color.should eq('F1C420')
+      expect(white_point.color).to eq('F1C420')
     end
 
     it 'provides handy accessor for color components' do
       point = ColouredPoint.new(0, 0, '112233')
 
-      point.red.should   eq('11')
-      point.green.should eq('22')
-      point.blue.should  eq('33')
+      expect(point.red).to   eq('11')
+      expect(point.green).to eq('22')
+      expect(point.blue).to  eq('33')
     end
 
     it 'supports all Point\'s operations' do
@@ -136,7 +138,7 @@ describe 'So Class:' do
 
       p3 = p1 + p2
       p3.move!(10, 10)
-      p3.pos.should eq([14, 16])
+      expect(p3.pos).to eq([14, 16])
     end
   end
 end

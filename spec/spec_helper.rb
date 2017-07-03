@@ -6,6 +6,8 @@
 ##
 ## Author(s):
 ##  - Lta Akr <>
+##  Edited by
+##  - Emmanuel Derozin <emmanueldd>
 ##
 ## Copyright (C) 2013 Lta Akr
 
@@ -32,4 +34,3 @@ RSpec.configure do |config|
   # config.alias_example_to :they
   # config.alias_example_to :there
 end
-

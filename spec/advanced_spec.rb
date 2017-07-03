@@ -6,6 +6,8 @@
 ##
 ## Author(s):
 ##  - Lta Akr <>
+##  Edited by
+##  - Emmanuel Derozin <emmanueldd>
 ##
 ## Copyright (C) 2013 Lta Akr
 
@@ -20,51 +22,51 @@ require 'advanced'
 #
 describe Advanced do
   it 'is a module' do
-    (Advanced.class == Module).should be_true
+    expect(Advanced.class == Module).to be_truthy
     # is almost the same as
-    (Advanced.is_a?(Module)).should be_true
+    expect(Advanced.is_a?(Module)).to be_truthy
   end
   describe 'with methods' do
     # Advanced.class_as_string(klass) return the name of the class of
     # the object given in parameter
     specify '#class_as_string' do
-      Advanced.class_as_string(Array).should eq('Array')
-      Advanced.class_as_string(Hash).should eq('Hash')
-      Advanced.class_as_string(String).should eq('String')
+      expect(Advanced.class_as_string(Array)).to eq('Array')
+      expect(Advanced.class_as_string(Hash)).to eq('Hash')
+      expect(Advanced.class_as_string(String)).to eq('String')
     end
 
     # Hint: Google: 'ruby const_get', 'ruby Kernel'
     specify '#string_as_class' do
-      Advanced.string_as_class('String').should eq(String)
-      Advanced.string_as_class('String').new.is_a?(String).should be_true
+      expect(Advanced.string_as_class('String')).to eq(String)
+      expect(Advanced.string_as_class('String').new.is_a?(String)).to be_truthy
 
-      Advanced.string_as_class('Array').should eq(Array)
+      expect(Advanced.string_as_class('Array')).to eq(Array)
       array = Advanced.string_as_class('Array').new
       array << 1 << 2 << 3
-      array.is_a?(Array).should be_true
-      array.should eq([1, 2, 3])
+      expect(array.is_a?(Array)).to be_truthy
+      expect(array).to eq([1, 2, 3])
 
-      Advanced.string_as_class('Point').should eq(Point)
+      expect(Advanced.string_as_class('Point')).to eq(Point)
       point = Advanced.string_as_class('Point').new
-      point.is_a?(Point).should be_true
-      point.pos.should eq([0, 0])
+      expect(point.is_a?(Point)).to be_truthy
+      expect(point.pos).to eq([0, 0])
     end
 
     specify '#respond_to_each?' do
-      Advanced.respond_to_each?(Hash.new).should be_true
-      Advanced.respond_to_each?(Array.new).should be_true
-      Advanced.respond_to_each?({}).should be_true # same as first one
-      Advanced.respond_to_each?([]).should be_true # same as second one
+      expect(Advanced.respond_to_each?(Hash.new)).to be_truthy
+      expect(Advanced.respond_to_each?(Array.new)).to be_truthy
+      expect(Advanced.respond_to_each?({})).to be_truthy # same as first one
+      expect(Advanced.respond_to_each?([])).to be_truthy # same as second one
 
-      Advanced.respond_to_each?(0..10).should be_true
+      expect(Advanced.respond_to_each?(0..10)).to be_truthy
     end
 
     # Hint: google 'ruby method_missing', 'Symbol#to_s / String#to_sym'
     specify '#respond_to_something?' do
-      Advanced.respond_to_uniq?(Array.new).should be_true
-      Advanced.respond_to_unexistent?(Array.new).should be_false
-      Advanced.respond_to_keys?(Hash.new).should be_true
-      Advanced.respond_to_unexistent?(Hash.new).should be_false
+      expect(Advanced.respond_to_uniq?(Array.new)).to be_truthy
+      expect(Advanced.respond_to_unexistent?(Array.new)).to be_falsey
+      expect(Advanced.respond_to_keys?(Hash.new)).to be_truthy
+      expect(Advanced.respond_to_unexistent?(Hash.new)).to be_falsey
       expect { Advanced.unexistent?(Hash.new) }
         .to raise_error
       expect { Advanced.respond_to_keys(Hash.new) }
@@ -73,9 +75,9 @@ describe Advanced do
 
     # Hint: This is a one-liner
     specify '#calculette' do
-      Advanced.calculette('1 + 1').should eq(2)
-      Advanced.calculette('(5 * 5 - 2) / 0.5').should eq(46.0)
-      Advanced.calculette('2 ** 2').should eq(4)
+      expect(Advanced.calculette('1 + 1')).to eq(2)
+      expect(Advanced.calculette('(5 * 5 - 2) / 0.5')).to eq(46.0)
+      expect(Advanced.calculette('2 ** 2')).to eq(4)
     end
   end
 end

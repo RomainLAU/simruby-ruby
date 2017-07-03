@@ -6,6 +6,8 @@
 ##
 ## Author(s):
 ##  - Lta Akr <>
+##  Edited by
+##  - Emmanuel Derozin <emmanueldd>
 ##
 ## Copyright (C) 2013 Lta Akr
 
@@ -14,62 +16,62 @@ require 'basic'
 
 describe 'Basics:' do
   it 'Define constants and globals' do
-    defined?(CONSTANT).should be_true
-    defined?(CONSTANT2).should be_true
+    expect(defined?(CONSTANT)).to be_truthy
+    expect(defined?(CONSTANT2)).to be_truthy
 
-    defined?($my_string).should be_true
-    $my_string.is_a?(String).should be_true
+    expect(defined?($my_string)).to be_truthy
+    expect($my_string.is_a?(String)).to be_truthy
 
-    defined?($my_symbol).should be_true
-    $my_symbol.is_a?(Symbol).should be_true
+    expect(defined?($my_symbol)).to be_truthy
+    expect($my_symbol.is_a?(Symbol)).to be_truthy
 
-    defined?($my_array).should be_true
-    $my_array.is_a?(Array).should be_true
+    expect(defined?($my_array)).to be_truthy
+    expect($my_array.is_a?(Array)).to be_truthy
 
-    defined?($my_float).should be_true
-    $my_float.is_a?(Float).should be_true
+    expect(defined?($my_float)).to be_truthy
+    expect($my_float.is_a?(Float)).to be_truthy
 
-    defined?($my_nil).should be_true
-    $my_nil.should be_nil
+    expect(defined?($my_nil)).to be_truthy
+    expect($my_nil).to be_nil
 
-    defined?($my_boolean).should be_true
-    ($my_boolean == true or $my_boolean == false)
-      .should be_true
+    expect(defined?($my_boolean)).to be_truthy
+    expect($my_boolean == true || $my_boolean == false)
+      .to be_truthy
   end
 
   it 'say Hello!' do
-    hello().should eq("Hello, Ruby World!")
+    expect(hello()).to eq("Hello, Ruby World!")
   end
 
   # Define a method called 'nothing' which takes 3 parameters with
   # default values (we don't care about the value of the defaults)
   # The method does nothing and return nil
   it 'supports default parameters value' do
-    nothing().should be_nil
-    nothing(1).should be_nil
-    nothing(1, 2).should be_nil
-    nothing(1, 2, 3).should be_nil
+    expect(nothing()).to be_nil
+    expect(nothing(1)).to be_nil
+    expect(nothing(1, 2)).to be_nil
+    expect(nothing(1, 2, 3)).to be_nil
     expect { nothing(1, 2, 3, 4) }
       .to raise_error(ArgumentError)
   end
 
   it 'computes Fibonacci sequence' do
-    fibonacci(1).should eq(1)
-    fibonacci(2).should eq(1)
-    fibonacci(3).should eq(fibonacci(1) + fibonacci(2))
-    fibonacci(4).should eq(fibonacci(2) + fibonacci(3))
-    fibonacci(12).should eq(144)
-    fibonacci(18).should eq(2584)
-    fibonacci(23).should eq(28657)
+    expect(fibonacci(1)).to eq(1)
+    expect(fibonacci(2)).to eq(1)
+    expect(fibonacci(3)).to eq(fibonacci(1) + fibonacci(2))
+    expect(fibonacci(4)).to eq(fibonacci(2) + fibonacci(3))
+    expect(fibonacci(12)).to eq(144)
+    expect(fibonacci(18)).to eq(2584)
+    expect(fibonacci(23)).to eq(28657)
   end
 
   # Hint: 'def who_is_bigger(a, b, c)'
   it 'tells me the biggest' do
-    who_is_bigger(84, 42, nil).should eq("nil detected")
-    who_is_bigger(nil, 42, 21).should eq("nil detected")
-    who_is_bigger(84, 42, 21).should eq("a is bigger")
-    who_is_bigger(42, 84, 21).should eq("b is bigger")
-    who_is_bigger(42, 21, 84).should eq("c is bigger")
+    expect(who_is_bigger(84, 42, nil)).to eq("nil detected")
+    expect(who_is_bigger(nil, 42, 21)).to eq("nil detected")
+    expect(who_is_bigger(84, 42, 21)).to eq("a is bigger")
+    expect(who_is_bigger(42, 84, 21)).to eq("b is bigger")
+    expect(who_is_bigger(42, 21, 84)).to eq("c is bigger")
   end
 
   # Reverse, upcase then removes all L, T and A.
@@ -89,8 +91,8 @@ describe 'Basics:' do
   # Hint: Should be 2 lines (and can be one :)
   # Hint: google ruby array each
   it 'finds 42' do
-    array_42([1, 2, 3, 4, 5, 6, 7 , 8, 9, 10]).should be_false
-    array_42([1, 2, 3, 4, 5, 6, 7 , 8, 9, 42, 21, 10.5]).should be_true
+    expect(array_42([1, 2, 3, 4, 5, 6, 7 , 8, 9, 10])).to be_falsey
+    expect(array_42([1, 2, 3, 4, 5, 6, 7 , 8, 9, 42, 21, 10.5])).to be_truthy
   end
 
   # The magic_array function takes an array of number or an array of
