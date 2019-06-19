@@ -26,3 +26,6 @@ end
 def magic_array(my_array)
   return my_array.flatten.reverse.map { |x| x * 2 }.delete_if { |x| x%3 == 0 }.uniq.sort
 end
+
+puts 'Coucou Dan'
+puts array_42([42])
