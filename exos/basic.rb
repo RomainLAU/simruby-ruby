@@ -45,11 +45,9 @@ def reverse_upcase_noLTA(param)
 end
 
 def array_42(param)
-    true if param.include?(42)
+    return param.include?(42)
 end
 
 def magic_array(param)
-    return param.flatten.reverse.map{|value| value *2}.reject {|value| value % 3 == 0}.uniq.sort
-    
-    # return param.reverse.reject {|value| value % 3 == 0}
+    return param.flatten.reverse.map{|value| value * 2}.reject{|value| value % 3 == 0}.uniq.sort
 end
